@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.22;
 
-import {EnumerableSet} from "@openzeppelin/contracts/utils/structs/EnumerableSet.sol";
-import {Arrays} from "@openzeppelin/contracts/utils/Arrays.sol";
+import {EnumerableSet} from "openzeppelin-contracts/contracts/utils/structs/EnumerableSet.sol";
+import {Arrays} from "openzeppelin-contracts/contracts/utils/Arrays.sol";
 import {IFungibleFractionsOperations} from "../interfaces/IFungibleFractionsOperations.sol";
 import {IDataPointRegistry} from "../interfaces/IDataPointRegistry.sol";
 import {IDataIndex} from "../interfaces/IDataIndex.sol";

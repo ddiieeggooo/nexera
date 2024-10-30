@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.22;
 
-import {Create2} from "@openzeppelin/contracts/utils/Create2.sol";
+import {Create2} from "openzeppelin-contracts/contracts/utils/Create2.sol";
 import {MinimalisticERC20FractionDataManager} from "./MinimalisticERC20FractionDataManager.sol";
 
 /**
