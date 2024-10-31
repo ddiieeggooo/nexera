@@ -1,66 +1,12 @@
-## Foundry
+TECHNICAL DOCUMENT :
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+ERC-7208, usage and paradigme.
 
-Foundry consists of:
+The most important thing that differentiate ERC-7208 from other token factories, is that the data can be stored on chain and can be upradeable. In order to do so, I separated the management smart contracts from the data smart contracts. If needed, they can call each others, but the separation make possible to manage the logic without having to modify the storage, or handle the data without the use of superfluous computation.
+It also secures the storage by only enabling managers to decide who can write data, and at the same time data can be read by everyone.
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+The ERC-7208 could become some kind of layer zero for other tokens standards so they can keep their security, compliance and/or non-fungibility, and at the same time benefits from the inheritance of an adaptable token.
 
-## Documentation
+Design decisions.
 
-https://book.getfoundry.sh/
-
-## Usage
-
-### Build
-
-```shell
-$ forge build
-```
-
-### Test
-
-```shell
-$ forge test
-```
-
-### Format
-
-```shell
-$ forge fmt
-```
-
-### Gas Snapshots
-
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+The first thought is "How can I store those data on chain ?" and then "How that much data can be handled on-chain ?" And then I discovered the DataPoints.sol file from ERC-7208 and I thought that's where a big part of the wizardry happens. I was confronted with an error I already encounter, the "stack too deep" error but it's something that layer 2 of Ethereum would handle without spending too much in gas fees.
