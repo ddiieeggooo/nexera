@@ -11,7 +11,7 @@ import "@openzeppelin/contracts/utils/Context.sol";
  * @title ProfitSharingManager
  * @dev Manages profit distribution in compliance with ERC-7208.
  */
-contract ProfitSharingManager is Context, Ownable {
+contract ProfitSharingManager is Ownable {
     IDataIndex public dataIndex;
     IDataObject public voteDataObject;
     IDataObject public profitDataObject;
@@ -32,7 +32,7 @@ contract ProfitSharingManager is Context, Ownable {
         address _dataIndex,
         address _voteDataObject,
         address _profitDataObject
-    ) {
+    ) Ownable(_msgSender()) {
         dataIndex = IDataIndex(_dataIndex);
         voteDataObject = IDataObject(_voteDataObject);
         profitDataObject = IDataObject(_profitDataObject);

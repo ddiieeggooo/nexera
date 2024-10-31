@@ -13,7 +13,7 @@ import "@openzeppelin/contracts/utils/Context.sol";
  * @title IdentityManager
  * @dev Manages identity issuance using ERC-7208 standard.
  */
-contract IdentityManager is Context, Ownable {
+contract IdentityManager is Ownable {
     IDataPointRegistry public dataPointRegistry;
     IDataIndex public dataIndex;
     IDataObject public identityDataObject;
@@ -31,7 +31,7 @@ contract IdentityManager is Context, Ownable {
         address _dataPointRegistry,
         address _dataIndex,
         address _identityDataObject
-    ) {
+    ) Ownable(_msgSender()) {
         dataPointRegistry = IDataPointRegistry(_dataPointRegistry);
         dataIndex = IDataIndex(_dataIndex);
         identityDataObject = IDataObject(_identityDataObject);
