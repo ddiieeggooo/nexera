@@ -80,7 +80,7 @@ contract MinimalisticFungibleFractionsDO is IDataObject {
     /**
      * @dev Error thrown when id couldn't be removed.
      * @param id The id of the token
-     **/
+     */
     error DiidIdNotFound(uint256 id);
 
     /**
