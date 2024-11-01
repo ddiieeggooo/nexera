@@ -20,7 +20,7 @@ write
 read
 setDataIndexImplementation
 
-/IdentityManage.sol :
+/IdentityManager.sol :
 setTicketManager
 issueIdentity
 getIdentityOwner
