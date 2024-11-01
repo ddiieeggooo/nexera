@@ -2,13 +2,15 @@
 pragma solidity ^0.8.22;
 
 import {Test} from "forge-std/Test.sol";
-import {IdentityManager} from "src/contracts/IdentityManager.sol";
+import {IdentityManager} from "src/contracts/main/IdentityManager.sol";
 import {IDataIndex} from "src/contracts/interfaces/IDataIndex.sol";
 import {IDataPointRegistry} from "src/contracts/interfaces/IDataPointRegistry.sol";
 import {IDataObject} from "src/contracts/interfaces/IDataObject.sol";
-import {IdentityDataObject} from "src/contracts/IdentityDataObject.sol";
+import {IdentityDataObject} from "src/contracts/main/IdentityDataObject.sol";
 import {DataIndex} from "src/contracts/DataIndex.sol";
 import {DataPointRegistry} from "src/contracts/DataPointRegistry.sol";
+import {DataPoints, DataPoint} from "src/contracts/utils/DataPoints.sol";
+// import {OwnableUnauthorizedAccount} from "openzeppelin-contracts/contracts/access/Ownable.sol";
 
 contract IdentityManagerTest is Test {
     IdentityManager public identityManager;
@@ -16,6 +18,8 @@ contract IdentityManagerTest is Test {
     DataIndex public dataIndex;
     DataPointRegistry public dataPointRegistry;
     address public ticketManager = address(0x1234);
+    // Mapping from DataPoint to owner address
+    mapping(DataPoint => address) public identityOwners;
 
     function setUp() public {
         // Deploy contracts
@@ -27,7 +31,8 @@ contract IdentityManagerTest is Test {
         identityManager = new IdentityManager(
             address(dataPointRegistry),
             address(dataIndex),
-            address(identityDataObject)
+            address(identityDataObject),
+            address(this) // initialOwner
         );
 
         // Set TicketManager
@@ -54,16 +59,38 @@ contract IdentityManagerTest is Test {
         // TicketManager issues an identity
         vm.prank(ticketManager);
         DataPoint dp = identityManager.issueIdentity(address(0xDEAD));
-        assertTrue(dp != DataPoint.wrap(bytes32(0)));
+
+        // Verify that the owner is correctly stored
+        address owner = identityManager.identityOwners(dp);
+        assertEq(owner, address(0xDEAD));
     }
 
     function test_GetIdentityOwner() public {
-        // Issue identity
+        // TicketManager issues an identity
         vm.prank(ticketManager);
         DataPoint dp = identityManager.issueIdentity(address(0xDEAD));
 
-        // Get identity owner
+        // Get identity owner via IdentityManager
         address owner = identityManager.getIdentityOwner(dp);
         assertEq(owner, address(0xDEAD));
+    }
+
+    function test_AttendeeStoresIdentityData() public {
+        // TicketManager issues an identity
+        vm.prank(ticketManager);
+        DataPoint dp = identityManager.issueIdentity(address(this));
+
+        // Attendee stores their identity data
+        identityManager.storeIdentityData(dp);
+
+        // Retrieve the identity data
+        bytes memory result = dataIndex.read(
+            address(identityDataObject),
+            dp,
+            bytes4(keccak256("getIdentity()")),
+            ""
+        );
+        address storedOwner = abi.decode(result, (address));
+        assertEq(storedOwner, address(this));
     }
 }
