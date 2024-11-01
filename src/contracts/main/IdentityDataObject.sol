@@ -5,7 +5,7 @@ import "../interfaces/IDataObject.sol";
 import "../interfaces/IDataIndex.sol";
 import "../interfaces/IDataPointRegistry.sol";
 import "../utils/DataPoints.sol";
-import "@openzeppelin/contracts/utils/Context.sol";
+import "openzeppelin-contracts/contracts/utils/Context.sol";
 
 /**
  * @title IdentityDataObject

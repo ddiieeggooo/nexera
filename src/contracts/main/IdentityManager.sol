@@ -6,7 +6,7 @@ import "../interfaces/IDataPointRegistry.sol";
 import "../interfaces/IDataObject.sol";
 import "../utils/DataPoints.sol";
 import "../utils/ChainidTools.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
+import "openzeppelin-contracts/contracts/access/Ownable.sol";
 
 /**
  * @title IdentityManager

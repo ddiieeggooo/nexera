@@ -10,3 +10,41 @@ The ERC-7208 could become some kind of layer zero for other tokens standards so 
 Design decisions.
 
 The first thought is "How can I store those data on chain ?" and then "How that much data can be handled on-chain ?" And then I discovered the DataPoints.sol file from ERC-7208 and I thought that's where a big part of the wizardry happens. I was confronted with an error I already encounter, the "stack too deep" error but it's something that layer 2 of Ethereum would handle without spending too much in gas fees.
+
+TEST SUIT :
+
+functions list:
+
+/IdentityDataObject.sol :
+write
+read
+setDataIndexImplementation
+
+/IdentityManage.sol :
+setTicketManager
+issueIdentity
+getIdentityOwner
+
+/ProfitDataObject.sol :
+setDataIndexImplementation
+read
+write
+
+/ProfitSharingManager.sol :
+setWinningFilm
+claimProfit
+calculateProfitShare
+getTotalWinners
+
+/TicketManager.sol :
+purchaseTicket
+withdrawFunds
+setTicketPrice
+
+/VoteDataObject.sol :
+setDataIndexImplementation
+read
+write
+
+/VotingManager.sol  :
+castVote

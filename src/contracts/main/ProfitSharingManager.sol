@@ -4,8 +4,8 @@ pragma solidity ^0.8.22;
 import "../interfaces/IDataIndex.sol";
 import "../utils/DataPoints.sol";
 import "../interfaces/IDataObject.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/utils/Context.sol";
+import "openzeppelin-contracts/contracts/access/Ownable.sol";
+import "openzeppelin-contracts/contracts/utils/Context.sol";
 
 /**
  * @title ProfitSharingManager

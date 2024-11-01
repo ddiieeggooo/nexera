@@ -6,7 +6,7 @@ import "../interfaces/IDataIndex.sol";
 import "../interfaces/IDataPointRegistry.sol";
 import "../interfaces/IDataObject.sol";
 import "../utils/DataPoints.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
+import "openzeppelin-contracts/contracts/access/Ownable.sol";
 
 /**
  * @title TicketManager
