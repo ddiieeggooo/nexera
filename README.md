@@ -16,34 +16,34 @@ TEST SUIT :
 functions list:
 
 /IdentityDataObject.sol :
-write
-read
+write  
+read  
 setDataIndexImplementation
 
 /IdentityManager.sol :
-setTicketManager
-issueIdentity
+setTicketManager  
+issueIdentity  
 getIdentityOwner
 
 /ProfitDataObject.sol :
-setDataIndexImplementation
-read
+setDataIndexImplementation  
+read  
 write
 
 /ProfitSharingManager.sol :
-setWinningFilm
-claimProfit
-calculateProfitShare
+setWinningFilm  
+claimProfit  
+calculateProfitShare  
 getTotalWinners
 
 /TicketManager.sol :
-purchaseTicket
-withdrawFunds
+purchaseTicket  
+withdrawFunds  
 setTicketPrice
 
 /VoteDataObject.sol :
-setDataIndexImplementation
-read
+setDataIndexImplementation  
+read  
 write
 
 /VotingManager.sol  :
