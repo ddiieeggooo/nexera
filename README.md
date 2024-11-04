@@ -53,11 +53,11 @@ To verify that the repository compile and the tests pass :
 
 from your terminal run those commands :
 
-mkdir ~/nexerachallenge
-cd nexerachallenge
-git clone git@github.com:ddiieeggooo/nexera.git
-cd nexera
-curl -L https://foundry.paradigm.xyz | bash
-foundryup
-forge install OpenZeppelin/openzeppelin-contracts
-forge test -v
+mkdir ~/nexerachallenge  
+cd nexerachallenge  
+git clone git@github.com:ddiieeggooo/nexera.git  
+cd nexera  
+curl -L https://foundry.paradigm.xyz | bash  
+foundryup  
+forge install OpenZeppelin/openzeppelin-contracts  
+forge test -v  
