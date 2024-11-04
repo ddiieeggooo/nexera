@@ -17,49 +17,49 @@ TEST SUIT :
 
 functions list:
 
-/IdentityDataObject.sol :
-write
-read
+/IdentityDataObject.sol :  
+write  
+read  
 setDataIndexImplementation
 
-/IdentityManager.sol :
-setTicketManager
-issueIdentity
+/IdentityManager.sol :  
+setTicketManager  
+issueIdentity  
 getIdentityOwner
 
-/ProfitDataObject.sol :
-setDataIndexImplementation
-read
+/ProfitDataObject.sol :  
+setDataIndexImplementation  
+read  
 write
 
-/ProfitSharingManager.sol :
-setWinningFilm
-claimProfit
-calculateProfitShare
+/ProfitSharingManager.sol :  
+setWinningFilm  
+claimProfit  
+calculateProfitShare  
 getTotalWinners
 
-/TicketManager.sol :
-purchaseTicket
-withdrawFunds
+/TicketManager.sol :  
+purchaseTicket  
+withdrawFunds  
 setTicketPrice
 
-/VoteDataObject.sol :
-setDataIndexImplementation
-read
-write
+/VoteDataObject.sol :  
+setDataIndexImplementation  
+read  
+write  
 
-/VotingManager.sol  :
+/VotingManager.sol  :  
 castVote
 
 To verify that the repository compile and the tests pass :
 
 from your terminal run those commands :
 
-mkdir ~/nexerachallenge
-cd nexerachallenge
-git clone git@github.com:ddiieeggooo/nexera.git
-cd nexera
-curl -L https://foundry.paradigm.xyz | bash
-foundryup
-forge install OpenZeppelin/openzeppelin-contracts
+mkdir ~/nexerachallenge  
+cd nexerachallenge  
+git clone git@github.com:ddiieeggooo/nexera.git  
+cd nexera  
+curl -L https://foundry.paradigm.xyz | bash  
+foundryup  
+forge install OpenZeppelin/openzeppelin-contracts  
 forge test -v
