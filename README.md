@@ -2,7 +2,7 @@ TECHNICAL DOCUMENT :
 
 ERC-7208, usage and paradigme.
 
-The most important thing that differentiates ERC-7208 from other token factories, is that the data can be stored on-chain and can be upradeable. In order to do so, I separated the management smart contracts from the data smart contracts. If needed, they can call each other. However, this separation allows us to manage the logic without modifying the storage and handle data efficiently without unnecessary computation.
+The most important thing that differentiates ERC-7208 from other token factories, is that the data can be stored on-chain and can be upradeable. In order to do so, It separated the management smart contracts from the data smart contracts. If needed, they can call each other. However, this separation allows us to manage the logic without modifying the storage and handle data efficiently without unnecessary computation.
 It also secures the storage by only enabling managers to decide who can write data, and at the same time data can be read by everyone.
 
 The ERC-7208 could become some kind of layer zero for other tokens standards so they can keep their security, compliance and/or non-fungibility, and at the same time benefits from the inheritance of an adaptable token.
