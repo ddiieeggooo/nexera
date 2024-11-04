@@ -26,7 +26,7 @@ contract TicketManager is Ownable {
      * @param _identityManager The address of the IdentityManager contract.
      * @param _ticketPrice The price of a ticket in wei.
      */
-    constructor(address _identityManager, uint256 _ticketPrice) Ownable(initialOwner) {
+    constructor(address _identityManager, uint256 _ticketPrice, address _initialOwner) Ownable(_initialOwner) {
         identityManager = IdentityManager(_identityManager);
         ticketPrice = _ticketPrice;
     }

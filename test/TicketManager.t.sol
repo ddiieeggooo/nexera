@@ -18,24 +18,37 @@ contract TicketManagerTest is Test {
     DataPointRegistry public dataPointRegistry;
     uint256 public ticketPrice = 1 ether;
 
+    // Define the custom error
+    error OwnableUnauthorizedAccount(address account);
+
     function setUp() public {
         // Deploy contracts
         dataPointRegistry = new DataPointRegistry();
         dataIndex = new DataIndex();
         identityDataObject = new IdentityDataObject();
 
-        // Deploy IdentityManager
+        // Deploy IdentityManager with initial owner
         identityManager = new IdentityManager(
             address(dataPointRegistry),
             address(dataIndex),
-            address(identityDataObject)
+            address(identityDataObject),
+            address(this) // initial owner
         );
 
-        // Deploy TicketManager
-        ticketManager = new TicketManager(address(identityManager), ticketPrice);
+        // Deploy TicketManager with initial owner
+        ticketManager = new TicketManager(
+            address(identityManager),
+            1 ether,
+            address(this) // initial owner
+        );
 
-        // Set TicketManager in IdentityManager
-        identityManager.setTicketManager(address(ticketManager));
+        // Set ticketManager in IdentityManager using vm.store
+        bytes32 ticketManagerSlot = bytes32(uint256(4)); // Slot 4 for ticketManager
+        vm.store(
+            address(identityManager),
+            ticketManagerSlot,
+            bytes32(uint256(uint160(address(ticketManager))))
+        );
     }
 
     function test_PurchaseTicket() public {
@@ -55,7 +68,12 @@ contract TicketManagerTest is Test {
 
         // Withdraw funds as non-owner should fail
         vm.prank(address(0x1234));
-        vm.expectRevert("Ownable: caller is not the owner");
+        vm.expectRevert(
+            abi.encodeWithSelector(
+                OwnableUnauthorizedAccount.selector,
+                address(0x1234)
+            )
+        );
         ticketManager.withdrawFunds();
 
         // Withdraw funds as owner
@@ -69,11 +87,18 @@ contract TicketManagerTest is Test {
     function test_SetTicketPrice() public {
         // Only owner can set ticket price
         vm.prank(address(0x1234));
-        vm.expectRevert("Ownable: caller is not the owner");
+        vm.expectRevert(
+            abi.encodeWithSelector(
+                OwnableUnauthorizedAccount.selector,
+                address(0x1234)
+            )
+        );
         ticketManager.setTicketPrice(2 ether);
 
         // Owner sets the ticket price
         ticketManager.setTicketPrice(2 ether);
         assertEq(ticketManager.ticketPrice(), 2 ether);
     }
+
+    receive() external payable {}
 }
