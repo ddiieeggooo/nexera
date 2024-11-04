@@ -15,38 +15,38 @@ TEST SUIT :
 
 functions list:
 
-/IdentityDataObject.sol :
+/IdentityDataObject.sol :  
 write  
 read  
 setDataIndexImplementation
 
-/IdentityManager.sol :
+/IdentityManager.sol :  
 setTicketManager  
 issueIdentity  
 getIdentityOwner
 
-/ProfitDataObject.sol :
+/ProfitDataObject.sol :  
 setDataIndexImplementation  
 read  
 write
 
-/ProfitSharingManager.sol :
+/ProfitSharingManager.sol :  
 setWinningFilm  
 claimProfit  
 calculateProfitShare  
 getTotalWinners
 
-/TicketManager.sol :
+/TicketManager.sol :  
 purchaseTicket  
 withdrawFunds  
 setTicketPrice
 
-/VoteDataObject.sol :
+/VoteDataObject.sol :  
 setDataIndexImplementation  
 read  
 write
 
-/VotingManager.sol  :
+/VotingManager.sol  :  
 castVote
 
 To verify that the repository compile and the tests pass :
