@@ -11,47 +11,95 @@ Design decisions.
 
 The first thought is "How can I store those data on chain ?" and then "How that much data can be handled on-chain ?" And then I discovered the DataPoints.sol file from ERC-7208 and I thought that's where a big part of the wizardry happens. I was confronted with an error I already encounter, the "stack too deep" error but it's something that layer 2 of Ethereum would handle without spending too much in gas fees.
 
-TEST SUIT :
+Approach to Utilizing ERC-7208 Architecture Patterns
 
-functions list:
+I leveraged ERC-7208's modular design to separate concerns:
 
-/IdentityDataObject.sol :  
-write  
-read  
-setDataIndexImplementation
+    Identity Management: Issuing on-chain identities to attendees using IdentityManager and IdentityDataObject contracts.
+    Voting System: Allowing identities to cast votes anonymously through the VotingManager and storing votes in the VoteDataObject.
+    Profit Sharing: Distributing profits to eligible voters using the ProfitSharingManager and tracking claims with ProfitDataObject.
 
-/IdentityManager.sol :  
-setTicketManager  
-issueIdentity  
-getIdentityOwner
+This architecture ensures that each component can be upgraded or modified independently without affecting the overall system.
+Test Suite
+Functions List
+/IdentityDataObject.sol
 
-/ProfitDataObject.sol :  
-setDataIndexImplementation  
-read  
-write
+    write
+    read
+    setDataIndexImplementation
 
-/ProfitSharingManager.sol :  
-setWinningFilm  
-claimProfit  
-calculateProfitShare  
-getTotalWinners
+/IdentityManager.sol
 
-/TicketManager.sol :  
-purchaseTicket  
-withdrawFunds  
-setTicketPrice
+    setTicketManager
+    issueIdentity
+    getIdentityOwner
 
-/VoteDataObject.sol :  
-setDataIndexImplementation  
-read  
-write
+/ProfitDataObject.sol
 
-/VotingManager.sol  :  
-castVote
+    setDataIndexImplementation
+    read
+    write
 
-To verify that the repository compile and the tests pass :
+/ProfitSharingManager.sol
 
-from your terminal run those commands :
+    setWinningFilm
+    claimProfit
+    calculateProfitShare
+    getTotalWinners
+
+/TicketManager.sol
+
+    purchaseTicket
+    withdrawFunds
+    setTicketPrice
+
+/VoteDataObject.sol
+
+    setDataIndexImplementation
+    read
+    write
+
+/VotingManager.sol
+
+    castVote
+
+Testing Approach
+
+I designed a suite of tests to validate the functionality of each component, focusing on the critical aspects outlined in the challenge:
+
+    On-Chain Identity Issuance:
+        Testing that an identity is correctly issued when a ticket is purchased.
+        Verifying that the identity data is stored securely and can be retrieved.
+        Ensuring that only ticket holders receive identities.
+
+    Voting Mechanism:
+        Verifying that each identity can cast only one vote.
+        Ensuring that votes are recorded correctly and remain anonymous.
+        Testing that duplicate voting is prevented and appropriately handled.
+
+    Profit-Sharing Distribution:
+        Simulating the selection of the winning film.
+        Testing that only those who voted for the winning film can claim their profit share.
+        Verifying the correct calculation and distribution of profits based on the number of eligible voters.
+
+Sample Test Cases
+
+    test_PurchaseTicket():
+        Verifies that a ticket purchase results in identity issuance.
+        Checks that the purchaser's address is associated with an identity token.
+
+    test_CastVote():
+        Ensures that a valid identity can cast a vote for a film.
+        Confirms that attempting to vote again results in a revert with the appropriate error message.
+
+    test_ClaimProfit():
+        Simulates the scenario where a winning film is set.
+        Tests that voters for the winning film can claim their profit.
+        Ensures that non-voters or those who voted for other films cannot claim profits.
+
+How to Verify Compilation and Test Success
+
+To verify that the repository compiles and the tests pass, run the following commands in your terminal:
 
 mkdir ~/nexerachallenge  
 cd nexerachallenge  
